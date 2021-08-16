@@ -1,0 +1,19 @@
+{
+  "name": "simple-ytdl",
+  "version": "1.0.0",
+  "description": "Simple Youtube Downloader made in JS",
+  "main": "index.js",
+  "dependencies": {
+    "readline": "^1.3.0",
+    "ytdl-core": "^4.9.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "ytdl"
+  ],
+  "author": "Androidy",
+  "license": "ISC"
+}
