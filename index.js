@@ -102,8 +102,13 @@ async function main() {
             ],
         });
         ffmpegProcess.on('close', () => {
-            console.log('done');
-            // Cleanup
+            console.clear();
+            console.log('\033[34m =============================');
+            console.log('\033[32m Done!');
+            console.log('\033[32m Video + Audio: final.mp4');
+            console.log('\033[32m Audio: audio.mp3');
+            console.log('\033[31m =============================');
+            console.log('\033[0m')
             process.stdout.write('\n\n\n\n');
             clearInterval(progressbarHandle);
         });
@@ -125,10 +130,9 @@ async function main() {
         audio.pipe(ffmpegProcess.stdio[4]);
         video.pipe(ffmpegProcess.stdio[5]);
 
-
         rl.close();
     });
-}
+}   
 
 hello();
 main();
