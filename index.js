@@ -91,7 +91,7 @@ async function main() {
             // Keep encoding
             '-c:v', 'copy',
             // Define output file
-            'out.mp4',
+            'final.mp4', "audio.mp3"
         ], {
             windowsHide: true,
             stdio: [
