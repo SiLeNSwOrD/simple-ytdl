@@ -1,8 +1,10 @@
-const fs = require("fs")
+const fs = require("fs-extra")
 const ytdl = require("ytdl-core")
 const readline = require("readline");
 const ffmpeg = require('ffmpeg-static');
 const cp = require('child_process');
+const path = require('path');
+const { Console } = require("console");
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -27,9 +29,10 @@ const tracker = {
 };
 
 async function hello() {
+    fs.existsSync("Downloads") || fs.mkdirSync("Downloads");
     console.log('\033[34m =============================');
     console.log('\033[32m Simple YTDL By Androidy#0001');
-    console.log('\033[32m Version: 1.0.1');
+    console.log('\033[32m Version: 1.0.2');
     console.log('\033[31m =============================');
     console.log('\033[0m')
 }
@@ -77,6 +80,8 @@ async function main() {
             readline.moveCursor(process.stdout, 0, -3);
         };
 
+        let random = (Math.random() + 1).toString(36).substring(7);
+
         const ffmpegProcess = cp.spawn(ffmpeg, [
             // Remove ffmpeg's console spamming
             '-loglevel', '8', '-hide_banner',
@@ -91,7 +96,7 @@ async function main() {
             // Keep encoding
             '-c:v', 'copy',
             // Define output file
-            'final.mp4', "audio.mp3"
+            random + '.mp4', random + ".mp3"
         ], {
             windowsHide: true,
             stdio: [
@@ -105,10 +110,25 @@ async function main() {
             console.clear();
             console.log('\033[34m =============================');
             console.log('\033[32m Done!');
-            console.log('\033[32m Video + Audio: final.mp4');
-            console.log('\033[32m Audio: audio.mp3');
+            console.log('\033[32m Video: ' + random + '.mp4');
+            console.log('\033[32m Audio: ' + random + '.mp3');
             console.log('\033[31m =============================');
             console.log('\033[0m')
+
+            var file1 = path.basename(random + '.mp4');
+            var file2 = path.basename(random + '.mp3');
+
+            var dest1 = path.resolve('Downloads', file1);
+            var dest2 = path.resolve('Downloads', file2);
+
+            fs.rename(file1, dest1, (err)=>{
+                if(err) throw err;
+            })
+
+            fs.rename(file2, dest2, (err)=>{
+                if(err) throw err;
+            })
+
             process.stdout.write('\n\n\n\n');
             clearInterval(progressbarHandle);
         });
