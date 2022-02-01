@@ -29,6 +29,7 @@ const tracker = {
 };
 
 async function hello() {
+    console.clear();
     fs.existsSync("Downloads") || fs.mkdirSync("Downloads");
     console.log('\033[34m =============================');
     console.log('\033[32m Simple YTDL By Androidy#0001');
